@@ -1,0 +1,134 @@
+﻿@model CalculateDeductions
+
+@{
+    ViewBag.Title = "Pay Check Preview";
+    ViewBag.Header = "Pay Check Preview";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="float-left">@Model.Employee.FirstName @Model.Employee.LastName</h2>
+                <h6 class="float-right">Date:  @DateTime.Now.ToString("MMMM dd, yyyy")</h6>
+            </div>
+
+            <div class="card-body text-center">
+                <h4 style="color: orangered;">Employee Pay Preview</h4>
+                <div class="table table-striped">
+                    <h5 style="color: lightseagreen;">Employee Information</h5>
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:50%">Employee ID</td>
+                            <td>@Model.Employee.EmployeeId</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Name</td>
+                            <td>@Model.Employee.FirstName @Model.Employee.LastName</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Deductions</td>
+                            <td>$1000 per year</td>
+                        </tr>
+                        <tr>
+                            <td>Dependent Deductions</td>
+                            <td>$500 per year per each dependent</td>
+                        </tr>
+                        @if (Model.Dependents.Any())
+                        {
+                            foreach (var dependent in Model.Dependents)
+                            {
+                                if (dependent.RelationToEmployee == RelationToEmployee.Spouse)
+                                {
+                                    <tr>
+                                        <td>Spouse Name</td>
+                                        <td>@dependent.FirstName @dependent.LastName</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>Children Name</td>
+                                        <td>@dependent.FirstName @dependent.LastName</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        <tr></tr>
+                    </table>
+                </div>
+
+                <div class="table table-striped">
+                    <h5 style="color: lightseagreen;">Per Pay Check Earnings</h5>
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:50%">Gross Earnings</td>
+                            <td>$@Model.GrossWages</td>
+                        </tr>
+                        <tr>
+                            <td>Pay Frequency</td>
+                            <td>Biweekly</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Deductions</td>
+                            <td>$@Model.EmployeeDeduction</td>
+                        </tr>
+                        <tr>
+                            <td>No. of Dependents</td>
+                            <td>@Model.DependentCount</td>
+                        </tr>
+                        <tr>
+                            <td>Dependent Deductions</td>
+                            <td>$@Model.DependentsDeduction</td>
+                        </tr>
+                        <tr>
+                            <td>Total Deductions</td>
+                            <td>$@Model.TotalDeductions</td>
+                        </tr>
+                        <tr>
+                            <td>Net Earnings</td>
+                            <td>$@Model.NetWages</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table table-striped">
+                    <h5 style="color: lightseagreen;">Yearly Earnings</h5>
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:50%">Gross Earnings</td>
+                            <td>$@Model.YearlyGrossWages</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Deductions</td>
+                            <td>$@Model.YearlyEmployeeDeduction</td>
+                        </tr>
+                        <tr>
+                            <td>No. of Dependents</td>
+                            <td>@Model.DependentCount</td>
+                        </tr>
+                        <tr>
+                            <td>Dependent Deductions</td>
+                            <td>$@Model.YearlyDependentsDeduction</td>
+                        </tr>
+                        <tr>
+                            <td>Total Deductions</td>
+                            <td>$@Model.YearlyTotalDeductions</td>
+                        </tr>
+                        <tr>
+                            <td>Net Earnings</td>
+                            <td>$@Model.YearlyNetWages</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-controller="Employee" asp-action="Details"
+                   asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
