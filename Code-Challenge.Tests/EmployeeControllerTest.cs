@@ -41,6 +41,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //get all employees request
         public void Get_AllEmployees_Request()
         {
             //Arrange
@@ -57,6 +58,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //search employee should return all employees when search is empty
         public void Search_Employee_From_ListofEmployees_When_Search_Is_Empty()
         {
             //Arrange
@@ -73,6 +75,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //search employee should return all matched employees when search is not empty
         public void Search_Employee_From_ListofEmployees_When_Search_Is_Not_Empty()
         {
             //Arrange
@@ -93,6 +96,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create employee view
         public void Create_Employee_Index_View()
         {
             //Act
@@ -103,6 +107,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create employee request
         public void Create_Employee_Request()
         {
             //Arrange
@@ -122,6 +127,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create employee with invalid firstname
         public void Create_Employee_With_Invalid_FirstName()
         {
             //Arrange 
@@ -142,6 +148,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create employee with invalid lastname
         public void Create_Employee_With_Invalid_LastName()
         {
             //Arrange 
@@ -162,6 +169,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create employee request when employee already exists
         public void Create_Employee_That_Already_Exists_In_Employees()
         {
             //Arrange 
@@ -182,6 +190,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //get employee by id with invalid employee
         public void Get_Employee_By_Id_Invalid_Employee()
         {
             //Arrange 
@@ -199,6 +208,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //get all dependents for employee
         public void Get_All_Dependents_By_Employee_By_Id()
         {
             //Arrange
@@ -217,6 +227,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //get employee details by employee id
         public void Get_Employee_Details_By_Id()
         {
             //Arrange
@@ -240,6 +251,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //delete employee when request is invalid
         public void Delete_Employee_By_Id_Invalid_Request()
         {
             //Arrange
@@ -255,6 +267,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //delete employe with valid request
         public void Delete_Employee_By_Id_Valid_Request()
         {
             //Arrange
@@ -277,6 +290,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //employee paypreview with invalid employee id
         public void Employee_PayPreview_Invalid_Employee()
         {
             //Arrange 
@@ -293,6 +307,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //employee paypreview with valid employee id
         public void Employee_PayPreview_Valid_Employee()
         {
             //Arrange 
@@ -315,6 +330,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //employee paypreview check employee have discount
         public void PayPreview_Check_Employee_Has_Discount()
         {
             //Arrange 
@@ -333,6 +349,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //employee paypreview check employee have no discount
         public void PayPreview_Check_Employee_Has_NoDiscount()
         {
             //Arrange 

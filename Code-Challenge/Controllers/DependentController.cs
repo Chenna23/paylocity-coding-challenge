@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Models;
+﻿using EmployeeManagement.Common;
+using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -65,7 +66,12 @@ namespace EmployeeManagement.Controllers
         {
             try
             {
-                Dependent dependent = _dependentRepository?.GetDependentById(id);
+                Dependent dependent = _dependentRepository.GetDependentById(id);
+                if (dependent == null)
+                {
+                    ViewBag.ErrorMessage = $"Dependent with Id = {id} not found.";
+                    return View("DependentNotFound", id);
+                }
                 return View(dependent);
             }
             catch (Exception)
@@ -81,11 +87,25 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                //check valid firstname
+                if (!string.IsNullOrWhiteSpace(updatedependent?.FirstName) && !General.RegexPatterns.IsStringOnlyAlphaNumeric(updatedependent?.FirstName?.Trim()))
+                {
+                    ViewBag.ErrorMessage = $"Please enter valid Dependent FirstName = {updatedependent.FirstName} Accepts only AlphaNumeric";
+                    return View(updatedependent);
+                }
+
+                //check valid lastname
+                if (!string.IsNullOrWhiteSpace(updatedependent?.LastName) && !General.RegexPatterns.IsStringOnlyAlphaNumeric(updatedependent?.LastName?.Trim()))
+                {
+                    ViewBag.ErrorMessage = $"Please enter valid Dependent LastName = {updatedependent.LastName} Accepts only AlphaNumeric";
+                    return View(updatedependent);
+                }
+
                 try
                 {
                     if (updatedependent?.DependentId != null)
                     {
-                        _dependentRepository?.UpdateDependent(updatedependent);
+                        _dependentRepository.UpdateDependent(updatedependent);
                         return RedirectToAction("Details", "employee", new { id = updatedependent.EmployeeId });
                     }
                 }

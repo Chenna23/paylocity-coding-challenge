@@ -47,6 +47,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //create dependent view
         public void Create_Dependent_Index_View()
         {
             //Act
@@ -79,6 +80,24 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //edit dependent with invalid id
+        public void Edit_Dependent_Invalid_Dependent_Id()
+        {
+            //Arrange 
+            Dependent _request = null;
+            _dependentRepository.Setup(er => er.GetDependentById(It.IsAny<int>())).Returns(_request);
+            var expected = $"Dependent with Id = 99 not found.";
+
+            //Act
+            var result = _dependentController.EditDependent(99) as ViewResult;
+            var actual = (string)result.ViewData["ErrorMessage"];
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        //edit dependent to return current dependent
         public void Edit_Dependent_Should_Return_Current_Dependent()
         {
             //Arrange 
@@ -123,6 +142,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //invalid request for delete dependent
         public void Delete_Dependent_Invalid_Request()
         {
             //Arrange
@@ -137,6 +157,7 @@ namespace Code_Challenge.Tests
         }
 
         [Fact]
+        //delete dependent
         public void Delete_Dependent_Valid_Request()
         {
             //Arrange
