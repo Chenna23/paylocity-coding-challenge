@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Models
 {
@@ -39,7 +36,7 @@ namespace EmployeeManagement.Models
         public Dependent DeleteDependent(int id)
         {
             Dependent dependent = context?.Dependents?.Find(id);
-            if(dependent != null)
+            if (dependent != null)
             {
                 context.Dependents.Remove(dependent);
                 context.SaveChanges();

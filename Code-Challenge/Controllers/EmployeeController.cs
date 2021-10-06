@@ -49,7 +49,7 @@ namespace EmployeeManagement.Controllers
 
         //return create an employee view
         [HttpGet]
-        public ViewResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -97,7 +97,7 @@ namespace EmployeeManagement.Controllers
                 Employee employee = _employeeRepository.GetEmployeeById(id);
                 if (employee == null)
                 {
-                    Response.StatusCode = 404;
+                    ViewBag.ErrorMessage = $"Employee with Id = {id} not found.";
                     return View("EmployeeNotFound", id);
                 }
 
@@ -156,15 +156,18 @@ namespace EmployeeManagement.Controllers
         {
             try
             {
+                //Get employee by Id
                 Employee employee = _employeeRepository.GetEmployeeById(id);
                 if (employee == null)
                 {
-                    Response.StatusCode = 404;
+                    ViewBag.ErrorMessage = $"Employee with Id = {id} not found.";
                     return View("EmployeeNotFound", id);
                 }
 
+                //Get list of dependents by employee id
                 List<Dependent> dependents = _dependentRepository.GetDependentsByEmployeeId(id);
 
+                //Calculate employee and dependent deductions
                 CalculateDeductions employeeDeductions = new CalculateDeductions
                 {
                     Employee = employee,
@@ -243,9 +246,11 @@ namespace EmployeeManagement.Controllers
         {
             try
             {
+                //get all employees
                 IEnumerable<Employee> employees = _employeeRepository.GetAllEmployees();
                 if (employees.Any())
                 {
+                    //check employee exists or not
                     return employees.Any(x => x.FirstName.Trim().ToUpper() == employee.FirstName.Trim().ToUpper() &&
                         x.LastName.Trim().ToUpper() == employee.LastName.Trim().ToUpper());
                 }

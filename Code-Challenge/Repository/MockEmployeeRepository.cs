@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace EmployeeManagement.Models
 {
+    //Mock Employee repository data
     public class MockEmployeeRepository : IEmployeeRepository
     {
         private readonly List<Employee> _employeeList;
@@ -19,18 +20,22 @@ namespace EmployeeManagement.Models
             };
         }
 
+        //Get all employees from repository
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeeList;
         }
 
+        //Get employee by id
         public Employee GetEmployeeById(int Id)
         {
             return _employeeList?.FirstOrDefault(e => e.EmployeeId == Id);
         }
 
+        //Add employee to repository
         public Employee Add(Employee employee)
         {
+            //Check any employee exists or not
             if (!_employeeList.Any())
             {
                 employee.EmployeeId = 1;

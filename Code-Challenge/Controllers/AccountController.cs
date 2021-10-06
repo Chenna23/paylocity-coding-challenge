@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
     [AllowAnonymous]
+    //Account controller
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -21,20 +19,15 @@ namespace EmployeeManagement.Controllers
             this.signInManager = signInManager;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
-        }
-
         [HttpGet]
+        //Registration GET method
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        //Registration POST method
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (ModelState.IsValid)
@@ -47,7 +40,7 @@ namespace EmployeeManagement.Controllers
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
@@ -57,12 +50,14 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
+        //Login GET method
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        //Login POST method
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -84,6 +79,14 @@ namespace EmployeeManagement.Controllers
             }
 
             return View(loginViewModel);
+        }
+
+        [HttpPost]
+        //Logout method
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
         }
     }
 }

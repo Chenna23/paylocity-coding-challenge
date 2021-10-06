@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace EmployeeManagement.Models
 {
+    //SQL employee repository
     public class SQLEmployeeRepository : IEmployeeRepository
     {
         private readonly AppDbContext context;
@@ -11,16 +12,19 @@ namespace EmployeeManagement.Models
             this.context = context;
         }
 
+        //Get all employees
         public IEnumerable<Employee> GetAllEmployees()
         {
             return context?.Employees;
         }
 
+        //Get employee by Id
         public Employee GetEmployeeById(int Id)
         {
             return context?.Employees?.Find(Id);
         }
 
+        //Add employee to repository
         public Employee Add(Employee employee)
         {
             context?.Employees?.Add(employee);
@@ -28,6 +32,7 @@ namespace EmployeeManagement.Models
             return employee;
         }
 
+        //Delete employee to repository
         public Employee Delete(int id)
         {
             Employee employee = context?.Employees?.Find(id);
@@ -39,6 +44,7 @@ namespace EmployeeManagement.Models
             return employee;
         }
 
+        //Update employee to repository
         public Employee Update(Employee employeeChanges)
         {
             var employee = context?.Employees?.FirstOrDefault(e => e.EmployeeId == employeeChanges.EmployeeId);
@@ -53,6 +59,7 @@ namespace EmployeeManagement.Models
             return null;
         }
 
+        //Search employee in repository
         public IEnumerable<Employee> Search(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
