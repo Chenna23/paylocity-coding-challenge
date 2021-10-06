@@ -16,7 +16,6 @@ namespace Code_Challenge.Tests
         private readonly Mock<IEmployeeRepository> _employeeRepository;
         private readonly Mock<IDependentRepository> _dependentRepository;
         private readonly EmployeeController _employeeController;
-        private readonly DependentController _dependentController;
 
         //Employee controller constructor
         public EmployeeControllerTest()
@@ -39,7 +38,6 @@ namespace Code_Challenge.Tests
             _employeeRepository = new Mock<IEmployeeRepository>();
             _dependentRepository = new Mock<IDependentRepository>();
             _employeeController = new EmployeeController(_employeeRepository.Object, _dependentRepository.Object);
-            _dependentController = new DependentController(_dependentRepository.Object);
         }
 
         [Fact]
@@ -331,6 +329,7 @@ namespace Code_Challenge.Tests
             Assert.Equal("Amy", employeeDeductions.Employee.FirstName);
             Assert.Equal("Bard", employeeDeductions.Employee.LastName);
             Assert.Equal(900, employeeDeductions.YearlyEmployeeDeduction);
+            Assert.Equal(52000, employeeDeductions.YearlyGrossWages);
         }
 
         [Fact]
@@ -348,6 +347,7 @@ namespace Code_Challenge.Tests
             Assert.Equal("Mary", employeeDeductions.Employee.FirstName);
             Assert.Equal("Hendry", employeeDeductions.Employee.LastName);
             Assert.Equal(1000, employeeDeductions.YearlyEmployeeDeduction);
+            Assert.Equal(52000, employeeDeductions.YearlyGrossWages);
         }
     }
 }

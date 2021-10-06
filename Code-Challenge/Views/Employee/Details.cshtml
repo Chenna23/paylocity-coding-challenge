@@ -19,8 +19,7 @@
                 @if (Model.Dependents.Any())
                 {
                     <h4 style="color: lightseagreen;">Dependent information</h4>
-                    var i = 1;
-                    var j = 1;
+                    var i = 1; var j = 1; var k = 1;
                     foreach (var dependent in Model.Dependents)
                     {
                         <div class="row">
@@ -30,10 +29,15 @@
                                     <h5>Spouse #@i: @dependent.FirstName @dependent.LastName</h5>
                                     i = i + 1;
                                 }
-                                else
+                                else if (dependent.RelationToEmployee == RelationToEmployee.Children)
                                 {
                                     <h5>Children #@j: @dependent.FirstName @dependent.LastName</h5>
                                     j = j + 1;
+                                }
+                                else
+                                {
+                                    <h5>Unknown #@k: @dependent.FirstName @dependent.LastName</h5>
+                                    k = k + 1;
                                 }
                             </div>
                             <div class="col-sm-1 p-1">
@@ -74,7 +78,7 @@
                         <form method="post" asp-controller="Dependent" asp-action="AddDependent">
                             <input asp-for="Dependent.EmployeeId" type="hidden" value="@Model.Employee.EmployeeId" />
                             <div class="modal-header">
-                                <h5 class="modal-title" id="addDependentModalLabel">Add Dependent</h5>
+                                <h5 class="modal-title" id="addDependentModalLabel" style="color: orangered;">Add Dependent</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

@@ -5,5 +5,6 @@
     {
         Spouse,
         Children,
+        Unknown,
     }
 }

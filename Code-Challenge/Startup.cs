@@ -34,7 +34,7 @@ namespace Code_Challenge
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
-            services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
+            services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters().AddRazorRuntimeCompilation();
 
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<IDependentRepository, SQLDependentRepository>();
